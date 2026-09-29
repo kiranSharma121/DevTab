@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [time, setTime] = useState(new Date());
 
   useEffect(() => {
     chrome.storage.local.get(["tasks"], (result) => {
@@ -11,6 +12,12 @@ function App() {
         setTasks(result.tasks);
       }
     });
+  }, []);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(timer);
   }, []);
 
   useEffect(() => {
@@ -60,7 +67,12 @@ function App() {
           <h1>DevTab</h1>
         </div>
 
-        <div className="clock">14:30</div>
+        <div className="clock">
+          {time.toLocaleDateString([], {
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </div>
       </header>
 
       <main className="dashboard">
