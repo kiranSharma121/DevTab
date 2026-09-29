@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState("");
+  useEffect(() => {
+    chromeExtension.storage.local.get(["tasks"], (result) => {
+      if (result.tasks) {
+        setTasks(result.tasks);
+      }
+    });
+  }, []);
+  useEffect(() => {
+    chrome.storage.local.set({ tasks });
+  }, [tasks]);
+  function addTask() {
+    const text = newTask.trim();
+    if (!text) return;
+    setTasks([
+      ...tasks,
+      {
+        id: Date.now(),
+        text,
+        completed: false,
+      },
+    ]);
+    setNewTask("");
+  }
+  function toggleTask(id) {
+    setTasks(
+      tasks.map((task) =>
+        task.id == id ? { ...task, completed: !task.completed } : task,
+      ),
+    );
+  }
   return (
     <div className="app">
       <header className="header">
