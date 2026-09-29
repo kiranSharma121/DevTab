@@ -5,6 +5,23 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [time, setTime] = useState(new Date());
+  const [secondsLeft, setSecondsLeft] = useState(25 * 60);
+  const [isRunning, setIsRunning] = useState(false);
+  const minutes = Math.floor(secondsLeft / 60);
+  const seconds = secondsLeft % 60;
+  const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+
+  useEffect(() => {
+    if (!isRunning) return;
+    if (secondsLeft <= 0) {
+      setIsRunning(false);
+      return;
+    }
+    const timer = setInterval(() => {
+      setSecondsLeft((seconds) => seconds - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [isRunning, secondsLeft]);
 
   const hour = time.getHours();
   const greeting =
@@ -72,7 +89,7 @@ function App() {
         </div>
 
         <div className="clock">
-          {time.toLocaleDateString([], {
+          {time.toLocaleTimeString([], {
             hour: "2-digit",
             minute: "2-digit",
           })}
@@ -148,9 +165,24 @@ function App() {
         <section className="card">
           <h2>Pomodoro</h2>
 
-          <div className="timer">25:00</div>
-
-          <button className="start-button">Start</button>
+          <div className="timer">{formattedTime}</div>
+          <div className="timer-controls">
+            <button
+              className="start-button"
+              onClick={() => setIsRunning(!isRunning)}
+            >
+              {isRunning ? "Pause" : "Start"}
+            </button>
+            <button
+              className="reset-button"
+              onClick={() => {
+                setIsRunning(false);
+                setSecondsLeft(25 * 60);
+              }}
+            >
+              Reset
+            </button>
+          </div>
         </section>
 
         <section className="card quick-links">
