@@ -6,6 +6,10 @@ function App() {
   const [newTask, setNewTask] = useState("");
   const [time, setTime] = useState(new Date());
 
+  const hour = time.getHours();
+  const greeting =
+    hour < 12 ? "Good Morning" : hour < 18 ? "Good afternoon" : "Good evening";
+
   useEffect(() => {
     chrome.storage.local.get(["tasks"], (result) => {
       if (result.tasks) {
@@ -63,7 +67,7 @@ function App() {
     <div className="app">
       <header className="header">
         <div>
-          <p className="greeting">Good afternoon 👋</p>
+          <p className="greeting">{greeting} 👋</p>
           <h1>DevTab</h1>
         </div>
 
