@@ -34,6 +34,14 @@ function App() {
       ),
     );
   }
+  function deleteTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id));
+  }
+  function handleKeyDown(event) {
+    if (event.key == "Enter") {
+      addTask();
+    }
+  }
   return (
     <div className="app">
       <header className="header">
