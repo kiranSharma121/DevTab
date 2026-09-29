@@ -32,3 +32,139 @@ input {
   color: #666;
   font-size: 15px;
 }
+
+h1 {
+  margin: 0;
+  font-size: 42px;
+}
+
+.clock {
+  font-size: 32px;
+  font-weight: 600;
+}
+
+.dashboard {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 24px;
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+.task {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.task input {
+  width: 18px;
+  height: 18px;
+}
+
+.add-task {
+  margin-top: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #555;
+}
+
+.stat {
+  display: inline-flex;
+  flex-direction: column;
+  margin-right: 40px;
+}
+
+.stat strong {
+  font-size: 28px;
+}
+
+.stat span {
+  color: #777;
+  margin-top: 5px;
+}
+
+.github-stats {
+  display: flex;
+  gap: 35px;
+}
+
+.github-stats div {
+  display: flex;
+  flex-direction: column;
+}
+
+.github-stats strong {
+  font-size: 28px;
+}
+
+.github-stats span {
+  color: #777;
+  margin-top: 5px;
+}
+
+.timer {
+  font-size: 48px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.start-button {
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.link a {
+  text-decoration: none;
+  color: #111;
+  background: #f1f1f1;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+@media (max-width:700px) {
+  .app {
+    padding: 20px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    margin-bottom: 25px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  .clock {
+    font-size: 22px;
+  }
+}
