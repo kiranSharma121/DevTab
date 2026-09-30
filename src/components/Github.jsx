@@ -106,6 +106,25 @@ function GitHub() {
               <span>Following</span>
             </div>
           </div>
+          <h3 className="repo-title">Recent Repositories</h3>
+          <div className="repositories">
+            {repos.map((repo) => (
+              <a
+                key={repo.id}
+                href={repo.html_url}
+                target="_blank"
+                rel="noreferrer"
+                className="repository"
+              >
+                <strong>{repo.name}</strong>
+                <span>{repo.description || "No Description"}</span>
+                <small>
+                    ⭐️ {repo.stargazers_count }.{" "}
+                    {repo.language || "Unknown"}
+                </small>
+              </a>
+            ))}
+          </div>
 
           <a
             className="github-profile-link"
