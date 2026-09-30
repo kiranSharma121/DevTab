@@ -246,21 +246,34 @@ function App() {
           <h2>Quick Links</h2>
 
           <div className="links">
-            <a href="https://github.com" target="_blank">
-              GitHub
-            </a>
-
-            <a href="https://developer.mozilla.org" target="_blank">
-              MDN
-            </a>
-
-            <a href="https://stackoverflow.com" target="_blank">
-              Stack Overflow
-            </a>
-
-            <a href="https://npmjs.com" target="_blank">
-              npm
-            </a>
+            {links.map((link) => (
+              <div className="link-item" key={link.id}>
+                <a href={link.url} target="_blank" rel="noreferrer">
+                  {link.name}
+                </a>
+                <button
+                  className="delete-link"
+                  onClick={() => deleteLink(link.id)}
+                >
+                  x
+                </button>
+              </div>
+            ))}
+          </div>
+          <div className="link-form">
+            <input
+              type="text"
+              placeholder="Name"
+              value={linkName}
+              onChange={(event) => setLinkName(event.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="https://example.com"
+              value={linkUrl}
+              onChange={(event) => setLinkUrl(event.target.value)}
+            />
+            <button onClick={addLink}>Add Link</button>
           </div>
         </section>
       </main>
