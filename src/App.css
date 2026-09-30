@@ -238,6 +238,63 @@ h1 {
   cursor: pointer;
 }
 
+.github-connect {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.github-connect input {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.github-connect button {
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  background: #111;
+  color: white;
+  cursor: pointer;
+}
+
+.github-profile {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+}
+
+.github-avatar {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+}
+
+.github-profile h3 {
+  margin: 0;
+}
+
+.github-profile p {
+  margin: 4px 0 0;
+  color: #777;
+}
+
+.github-error {
+  width: 100%;
+  color: #c00;
+}
+
+.github-profile-link {
+  display: inline-block;
+  margin-top: 20px;
+  color: #111;
+}
+
 @media (max-width:700px) {
   .app {
     padding: 20px;
