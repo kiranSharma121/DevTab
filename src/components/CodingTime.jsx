@@ -150,53 +150,128 @@ function CodingTime() {
   const [connected, setConnected] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
   const [today, setToday] = useState(0);
   const [week, setWeek] = useState(0);
   const [streak, setStreak] = useState(0);
+
   async function loadData(token) {
     try {
       const data = await getHackatimeData(token);
+
       setToday(data.today);
       setWeek(data.week);
       setStreak(data.streak);
+
       setConnected(true);
       setError("");
     } catch (error) {
       console.error(error);
+
       setConnected(false);
       setError(error.message);
+
       await chrome.storage.local.remove("hackatimeAccessToken");
     }
   }
-}
-async function handleConnect() {
-  try {
-    setLoading(true);
-    setError("");
-    const token = await connectHacktatime();
-    await loadData(token);
-  } catch (error) {
-    console.error(error);
-    setError(error.message);
-  } finally {
-    setLoading(false);
-  }
-}
-async function handleLogout() {
-  await chrome.storage.local.remove("hackatimeAccessToken");
-  setConnected(false);
-  setToday(0);
-  setWeek(0);
-  setStreak(0);
-  setError("");
-}
-useEffect(() => {
-  chrome.storage.local.get(["hackatimeAccessToken"], async (result) => {
-    if (result.hackatimeAccessToken) {
-      await loadData(result.hackatimeAccessToken);
+
+  async function handleConnect() {
+    try {
+      setLoading(true);
+      setError("");
+
+      const token = await connectHackatime();
+
+      await loadData(token);
+    } catch (error) {
+      console.error(error);
+
+      setError(error.message);
+    } finally {
+      setLoading(false);
     }
-  });
-},[]);
-return(
-    
-)
+  }
+
+  async function handleLogout() {
+    await chrome.storage.local.remove("hackatimeAccessToken");
+
+    setConnected(false);
+    setToday(0);
+    setWeek(0);
+    setStreak(0);
+    setError("");
+  }
+
+  useEffect(() => {
+    chrome.storage.local.get(["hackatimeAccessToken"], async (result) => {
+      if (result.hackatimeAccessToken) {
+        await loadData(result.hackatimeAccessToken);
+      }
+    });
+  }, []);
+
+  return (
+    <section className="card coding-time-card">
+      <div className="coding-time-header">
+        <div>
+          <h2>Coding Time</h2>
+          <p>Hackatime</p>
+        </div>
+
+        {connected && (
+          <button
+            className="hackatime-refresh"
+            onClick={() => {
+              chrome.storage.local.get(["hackatimeAccessToken"], (result) => {
+                if (result.hackatimeAccessToken) {
+                  loadData(result.hackatimeAccessToken);
+                }
+              });
+            }}
+          >
+            Refresh
+          </button>
+        )}
+      </div>
+
+      {!connected ? (
+        <div className="hackatime-connect">
+          <p>Connect Hackatime to see your real coding time.</p>
+
+          <button onClick={handleConnect} disabled={loading}>
+            {loading ? "Connecting..." : "Connect Hackatime"}
+          </button>
+
+          {error && <p className="hackatime-error">{error}</p>}
+        </div>
+      ) : (
+        <>
+          <div className="coding-time-stats">
+            <div>
+              <strong>{formatTime(today)}</strong>
+              <span>Today</span>
+            </div>
+
+            <div>
+              <strong>{formatTime(week)}</strong>
+              <span>Last 7 Days</span>
+            </div>
+
+            <div>
+              <strong>{streak}</strong>
+              <span>Day Streak</span>
+            </div>
+          </div>
+
+          <button className="hackatime-logout" onClick={handleLogout}>
+            Disconnect
+          </button>
+
+          {error && <p className="hackatime-error">{error}</p>}
+        </>
+      )}
+    </section>
+  );
+}
+
+export default CodingTime;

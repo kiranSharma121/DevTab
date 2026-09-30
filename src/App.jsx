@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import GitHub from "./components/GitHub";
+import CodingTime from "./components/CodingTime";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -190,19 +191,7 @@ function App() {
           <p className="task-hint">Double-click a task to delete it.</p>
         </section>
 
-        <section className="card">
-          <h2>Coding Time</h2>
-
-          <div className="stat">
-            <strong>0h 00m</strong>
-            <span>Today</span>
-          </div>
-
-          <div className="stat">
-            <strong>0h 00m</strong>
-            <span>This week</span>
-          </div>
-        </section>
+        <CodingTime />
 
         <GitHub />
 
