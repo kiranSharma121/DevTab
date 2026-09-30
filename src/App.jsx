@@ -10,6 +10,63 @@ function App() {
   const minutes = Math.floor(secondsLeft / 60);
   const seconds = secondsLeft % 60;
   const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  const [links, setLinks] = useState([
+    {
+      id: 1,
+      name: "Github",
+      url: "https://github.com",
+    },
+    {
+      id: 2,
+      name: "MDN",
+      url: "https://developer.mozilla.org",
+    },
+    {
+      id: 3,
+      name: "Stack Overflow",
+      url: "https://stackoverflow.com",
+    },
+    {
+      id: 4,
+      name: "npm",
+      url: "https://npmjs.com",
+    },
+  ]);
+  const [linkName, setLinkName] = useState("");
+  const [linkUrl, setLinkUrl] = useState("");
+
+  useEffect(() => {
+    chrome.storage.local.get(["links"], (result) => {
+      if (result.links) {
+        setLinks(result.links);
+      }
+    });
+  }, []);
+  useEffect(() => {
+    chrome.storage.local.set({ links });
+  }, [links]);
+  function addLink() {
+    const name = linkName.trim();
+    const url = linkUrl.trim();
+    if (!name || !url) return;
+    let formattedUrl = url;
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+      formattedUrl = `https://${url}`;
+    }
+    setLinks([
+      ...links,
+      {
+        id: Date.now(),
+        name,
+        url: formattedUrl,
+      },
+    ]);
+    setLinkName("");
+    setLinkUrl("");
+  }
+  function deleteLink(id) {
+    setLinks(links.filter((link) => link.id !== id));
+  }
 
   useEffect(() => {
     if (!isRunning) return;
