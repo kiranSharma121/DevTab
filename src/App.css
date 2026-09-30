@@ -295,6 +295,41 @@ h1 {
   color: #111;
 }
 
+.repo-title {
+  margin-top: 25px;
+  margin-bottom: 12px;
+}
+
+.repositories {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.repository {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #111;
+}
+
+.repository:hover {
+  background: #f7f7f7;
+}
+
+.repository span {
+  color: #666;
+  font-size: 14px;
+}
+
+.repository small {
+  color: #888;
+}
+
 @media (max-width:700px) {
   .app {
     padding: 20px;
