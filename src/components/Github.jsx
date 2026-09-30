@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 function GitHub() {
   const [username, setUsername] = useState("");
   const [profile, setProfile] = useState(null);
@@ -7,18 +8,24 @@ function GitHub() {
 
   async function fetchProfile() {
     if (!username.trim()) return;
+
     setLoading(true);
     setError("");
+
     try {
       const response = await fetch(
         `https://api.github.com/users/${username.trim()}`,
       );
+
       if (!response.ok) {
         throw new Error("GitHub user not found");
       }
+
       const data = await response.json();
+
       setProfile(data);
-      chromeExtension.storage.local.set({
+
+      chrome.storage.local.set({
         githubUsername: username.trim(),
         githubProfile: data,
       });
@@ -29,16 +36,19 @@ function GitHub() {
       setLoading(false);
     }
   }
+
   useEffect(() => {
     chrome.storage.local.get(["githubUsername", "githubProfile"], (result) => {
       if (result.githubUsername) {
         setUsername(result.githubUsername);
       }
+
       if (result.githubProfile) {
         setProfile(result.githubProfile);
       }
     });
   }, []);
+
   return (
     <section className="card github-card">
       <h2>GitHub</h2>
@@ -51,14 +61,16 @@ function GitHub() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             onKeyDown={(event) => {
-              if (event.key == "Enter") {
+              if (event.key === "Enter") {
                 fetchProfile();
               }
             }}
           />
+
           <button onClick={fetchProfile}>
             {loading ? "Loading..." : "Connect"}
           </button>
+
           {error && <p className="github-error">{error}</p>}
         </div>
       ) : (
@@ -68,12 +80,14 @@ function GitHub() {
             alt={profile.login}
             className="github-avatar"
           />
+
           <div>
             <h3>{profile.name || profile.login}</h3>
             <p>@{profile.login}</p>
           </div>
         </div>
       )}
+
       {profile && (
         <>
           <div className="github-stats">
@@ -81,15 +95,18 @@ function GitHub() {
               <strong>{profile.public_repos}</strong>
               <span>Repositories</span>
             </div>
+
             <div>
               <strong>{profile.followers}</strong>
               <span>Followers</span>
             </div>
+
             <div>
               <strong>{profile.following}</strong>
               <span>Following</span>
             </div>
           </div>
+
           <a
             className="github-profile-link"
             href={profile.html_url}
@@ -103,4 +120,5 @@ function GitHub() {
     </section>
   );
 }
+
 export default GitHub;

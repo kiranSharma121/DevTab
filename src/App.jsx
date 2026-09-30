@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import GitHub from "./components/GitHub";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -203,21 +204,7 @@ function App() {
           </div>
         </section>
 
-        <section className="card">
-          <h2>GitHub</h2>
-
-          <div className="github-stats">
-            <div>
-              <strong>0</strong>
-              <span>Commits</span>
-            </div>
-
-            <div>
-              <strong>0</strong>
-              <span>PRs</span>
-            </div>
-          </div>
-        </section>
+        <GitHub />
 
         <section className="card">
           <h2>Pomodoro</h2>
