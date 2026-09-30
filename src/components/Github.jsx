@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 function GitHub() {
   const [username, setUsername] = useState("");
   const [profile, setProfile] = useState(null);
+  const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -13,40 +14,60 @@ function GitHub() {
     setError("");
 
     try {
-      const response = await fetch(
+      const userResponse = await fetch(
         `https://api.github.com/users/${username.trim()}`,
       );
 
-      if (!response.ok) {
+      if (!userResponse.ok) {
         throw new Error("GitHub user not found");
       }
 
-      const data = await response.json();
+      const userData = await userResponse.json();
 
-      setProfile(data);
+      const reposResponse = await fetch(
+        `https://api.github.com/users/${username.trim()}/repos?sort=updated&per_page=5`,
+      );
+
+      if (!reposResponse.ok) {
+        throw new Error("Could not load repositories");
+      }
+
+      const reposData = await reposResponse.json();
+
+      setProfile(userData);
+      setRepos(reposData);
 
       chrome.storage.local.set({
         githubUsername: username.trim(),
-        githubProfile: data,
+        githubProfile: userData,
+        githubRepos: reposData,
       });
     } catch (error) {
       setError(error.message);
       setProfile(null);
+      setRepos([]);
     } finally {
       setLoading(false);
     }
   }
 
   useEffect(() => {
-    chrome.storage.local.get(["githubUsername", "githubProfile"], (result) => {
-      if (result.githubUsername) {
-        setUsername(result.githubUsername);
-      }
+    chrome.storage.local.get(
+      ["githubUsername", "githubProfile", "githubRepos"],
+      (result) => {
+        if (result.githubUsername) {
+          setUsername(result.githubUsername);
+        }
 
-      if (result.githubProfile) {
-        setProfile(result.githubProfile);
-      }
-    });
+        if (result.githubProfile) {
+          setProfile(result.githubProfile);
+        }
+
+        if (result.githubRepos) {
+          setRepos(result.githubRepos);
+        }
+      },
+    );
   }, []);
 
   return (
@@ -74,22 +95,20 @@ function GitHub() {
           {error && <p className="github-error">{error}</p>}
         </div>
       ) : (
-        <div className="github-profile">
-          <img
-            src={profile.avatar_url}
-            alt={profile.login}
-            className="github-avatar"
-          />
-
-          <div>
-            <h3>{profile.name || profile.login}</h3>
-            <p>@{profile.login}</p>
-          </div>
-        </div>
-      )}
-
-      {profile && (
         <>
+          <div className="github-profile">
+            <img
+              src={profile.avatar_url}
+              alt={profile.login}
+              className="github-avatar"
+            />
+
+            <div>
+              <h3>{profile.name || profile.login}</h3>
+              <p>@{profile.login}</p>
+            </div>
+          </div>
+
           <div className="github-stats">
             <div>
               <strong>{profile.public_repos}</strong>
@@ -106,7 +125,9 @@ function GitHub() {
               <span>Following</span>
             </div>
           </div>
+
           <h3 className="repo-title">Recent Repositories</h3>
+
           <div className="repositories">
             {repos.map((repo) => (
               <a
@@ -117,10 +138,11 @@ function GitHub() {
                 className="repository"
               >
                 <strong>{repo.name}</strong>
-                <span>{repo.description || "No Description"}</span>
+
+                <span>{repo.description || "No description"}</span>
+
                 <small>
-                    ⭐️ {repo.stargazers_count }.{" "}
-                    {repo.language || "Unknown"}
+                  ⭐ {repo.stargazers_count} · {repo.language || "Unknown"}
                 </small>
               </a>
             ))}

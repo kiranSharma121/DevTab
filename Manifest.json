@@ -7,7 +7,12 @@
         "newtab":"index.html"
     },
     "permissions":[
-        "storage"
+        "storage",
+        "identity"
+    ],
+    "host_permissions":[
+        "https://hackatime.hackclub.com/*"
+
     ],
     "action":{
         "default_title":"DevTab"
