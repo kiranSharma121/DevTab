@@ -330,6 +330,100 @@ h1 {
   color: #888;
 }
 
+.coding-time-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.coding-time-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coding-time-header h2 {
+  margin: 0;
+}
+
+.coding-time-header p {
+  margin: 5px 0 0;
+  opacity: 0.6;
+}
+
+.coding-time-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.coding-time-stats div {
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(128, 128, 128, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.coding-time-stats strong {
+  font-size: 22px;
+}
+
+.coding-time-stats span {
+  font-size: 13px;
+  opacity: 0.6;
+}
+
+.hackatime-connect {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.hackatime-connect p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+.hackatime-connect button,
+.hacktime-refresh,
+.hackatime-logout {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.hackatime-refresh {
+  font-size: 13px;
+}
+
+.hackatime-logout {
+  align-self: flex-start;
+}
+
+.hackatime-error {
+  margin: 0;
+  font-size: 13px;
+  color: #e74c3c;
+}
+
+.hackatime-updated {
+  font-size: 13px;
+  color: #777;
+  margin-top: -8px;
+}
+
+.hacktime-refresh:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hackatime-logout {
+  cursor: pointer;
+}
+
 @media (max-width:700px) {
   .app {
     padding: 20px;

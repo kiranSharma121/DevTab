@@ -39,7 +39,6 @@ async function createCodeChallenge(verifier) {
 
 function formatTime(seconds) {
   const totalMinutes = Math.floor(seconds / 60);
-
   const hours = Math.floor(totalMinutes / 60);
   const minutes = totalMinutes % 60;
 
@@ -54,7 +53,6 @@ async function getHackatimeData(token) {
   const today = new Date();
 
   const weekStart = new Date(today);
-
   weekStart.setDate(today.getDate() - 6);
 
   const todayString = getDateString(today);
@@ -102,20 +100,10 @@ async function getHackatimeData(token) {
 }
 
 async function connectHackatime() {
-  if (!CLIENT_ID) {
-    throw new Error("Hackatime Client ID is missing. Check your .env file.");
-  }
-
-  if (!AUTH_URL || !TOKEN_URL || !API_URL) {
-    throw new Error("Hackatime environment variables are missing.");
-  }
-
   const redirectUri = chrome.identity.getRedirectURL();
 
   const state = randomString(32);
-
   const codeVerifier = randomString(64);
-
   const codeChallenge = await createCodeChallenge(codeVerifier);
 
   const params = new URLSearchParams({
@@ -176,11 +164,9 @@ async function connectHackatime() {
 
   const tokenResponse = await fetch(TOKEN_URL, {
     method: "POST",
-
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
     },
-
     body: new URLSearchParams({
       client_id: CLIENT_ID,
       code,
@@ -224,24 +210,24 @@ function CodingTime() {
 
   const [streak, setStreak] = useState(0);
 
+  const [lastUpdated, setLastUpdated] = useState(null);
+
   async function loadData(token) {
     try {
       const data = await getHackatimeData(token);
 
       setToday(data.today);
-
       setWeek(data.week);
-
       setStreak(data.streak);
 
       setConnected(true);
-
       setError("");
+
+      setLastUpdated(new Date());
     } catch (error) {
       console.error("Hackatime data error:", error);
 
       setConnected(false);
-
       setError(error.message);
 
       await chrome.storage.local.remove("hackatimeAccessToken");
@@ -251,7 +237,6 @@ function CodingTime() {
   async function handleConnect() {
     try {
       setLoading(true);
-
       setError("");
 
       const token = await connectHackatime();
@@ -269,21 +254,18 @@ function CodingTime() {
   async function handleRefresh() {
     try {
       setLoading(true);
-
       setError("");
 
       const result = await chrome.storage.local.get(["hackatimeAccessToken"]);
 
       if (!result.hackatimeAccessToken) {
         setConnected(false);
-
         return;
       }
 
       await loadData(result.hackatimeAccessToken);
     } catch (error) {
       console.error(error);
-
       setError(error.message);
     } finally {
       setLoading(false);
@@ -294,13 +276,10 @@ function CodingTime() {
     await chrome.storage.local.remove("hackatimeAccessToken");
 
     setConnected(false);
-
     setToday(0);
-
     setWeek(0);
-
     setStreak(0);
-
+    setLastUpdated(null);
     setError("");
   }
 
@@ -314,7 +293,6 @@ function CodingTime() {
         }
       } catch (error) {
         console.error(error);
-
         setError(error.message);
       }
     }
@@ -327,7 +305,6 @@ function CodingTime() {
       <div className="coding-time-header">
         <div>
           <h2>Coding Time</h2>
-
           <p>Hackatime</p>
         </div>
 
@@ -357,22 +334,29 @@ function CodingTime() {
           <div className="coding-time-stats">
             <div>
               <strong>{formatTime(today)}</strong>
-
               <span>Today</span>
             </div>
 
             <div>
               <strong>{formatTime(week)}</strong>
-
               <span>Last 7 Days</span>
             </div>
 
             <div>
               <strong>{streak}</strong>
-
               <span>Day Streak</span>
             </div>
           </div>
+
+          {lastUpdated && (
+            <div className="hackatime-updated">
+              Updated{" "}
+              {lastUpdated.toLocaleTimeString([], {
+                hour: "numeric",
+                minute: "2-digit",
+              })}
+            </div>
+          )}
 
           <button className="hackatime-logout" onClick={handleLogout}>
             Disconnect
