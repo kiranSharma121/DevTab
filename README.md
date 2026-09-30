@@ -1,16 +1,54 @@
-# React + Vite
+# DevTab
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+DevTab is a developer-focused new tab Chrome extension that combines productivity tools, GitHub activity, and coding-time tracking in one dashboard.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Todo list with persistent storage
+- Pomodoro timer
+- Custom quick links
+- GitHub profile integration
+- Recent GitHub repositories
+- GitHub repository statistics
+- Hackatime coding time
+- 7-day coding time
+- Coding streak
+- Persistent data using Chrome Storage
+- Clean and minimal developer-focused interface
 
-## React Compiler
+## Screenshots
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### DevTab Dashboard
 
-## Expanding the Oxlint configuration
+![DevTab Dashboard](screenshots/dashboard.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+### GitHub Integration
+
+![GitHub Integration](screenshots/github.png)
+
+### Hackatime Integration
+
+![Hackatime Integration](screenshots/hackatime.png)
+
+## Tech Stack
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Chrome Extension Manifest V3
+- Chrome Storage API
+- Chrome Identity API
+- GitHub API
+- Hackatime API
+- OAuth 2.0
+- PKCE
+
+## Installation
+
+### 1. Clone the repository
+
+```bash
+git clone YOUR_REPOSITORY_URL
+cd DevTab
+```
