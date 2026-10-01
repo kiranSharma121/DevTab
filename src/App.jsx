@@ -258,7 +258,7 @@ function App() {
 
         <CodingTime />
 
-        <GitHub />
+        <Github />
 
         <section className="card pomodoro-card">
           <div className="card-header">
