@@ -116,12 +116,18 @@ async function connectHackatime() {
     code_challenge_method: "S256",
   });
 
-  const authorizationUrl = `${AUTH_URL}?${params.toString()}`;
+  const authorizationUrl = new URL(AUTH_URL);
+
+  for (const [key, value] of params.entries()) {
+    authorizationUrl.searchParams.set(key, value);
+  }
+
+  const finalAuthUrl = authorizationUrl.toString();
 
   const responseUrl = await new Promise((resolve, reject) => {
     chrome.identity.launchWebAuthFlow(
       {
-        url: authorizationUrl,
+        url: finalAuthUrl,
         interactive: true,
       },
       (callbackUrl) => {
