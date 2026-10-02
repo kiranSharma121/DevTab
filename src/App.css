@@ -5,7 +5,7 @@
   --bg-soft: #0d0f15;
   --panel: rgba(17, 19, 28, 0.82);
   --panel-solid: #11131c;
-  --panel-hover: #121824;
+  --panel-hover: #151824;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.14);
   --text: #f4f5f7;
@@ -19,7 +19,6 @@
   --yellow: #fbbf24;
   --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
   --radius: 22px;
-
 }
 
 * {
@@ -93,6 +92,8 @@ a {
   padding: 46px 34px 70px;
 }
 
+
+
 .header {
   max-width: 1240px;
   margin: 0 auto 34px;
@@ -133,7 +134,10 @@ h1 {
   line-height: 0.95;
   letter-spacing: -0.065em;
   font-weight: 700;
-  background: linear-gradient(120deg, #ffffff 15%, #d8d1ff 50%, #8b5cf6 100%);
+  background: linear-gradient(120deg,
+      #ffffff 15%,
+      #d8d1ff 50%,
+      #8b5cf6 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -144,14 +148,13 @@ h1 {
   color: var(--text-muted);
   font-size: 14px;
   letter-spacing: -0.01em;
-
 }
 
 .clock {
   padding: 12px 17px;
   border: 1px solid var(--border);
   border-radius: 14px;
-  background: rgba(17, 19, 28.0.7);
+  background: rgba(17, 19, 28, 0.7);
   color: #d9dbe2;
   font-family: "DM Mono", monospace;
   font-size: 17px;
@@ -160,12 +163,15 @@ h1 {
   backdrop-filter: blur(16px);
 }
 
+
+
 .dashboard {
   max-width: 1240px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
+  align-items: start;
 }
 
 .card {
@@ -175,9 +181,11 @@ h1 {
   padding: 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  background: linear-gradient(145deg,
+  background:
+    linear-gradient(145deg,
       rgba(255, 255, 255, 0.035),
-      rgba(255, 255, 255, 0.008)), var(--panel);
+      rgba(255, 255, 255, 0.008)),
+    var(--panel);
   box-shadow: var(--shadow);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -197,10 +205,11 @@ h1 {
   height: 1px;
   background: linear-gradient(90deg,
       transparent,
-      rgba(255, 255, 255, 0.12), transparent);
+      rgba(255, 255, 255, 0.12),
+      transparent);
 }
 
-card::after {
+.card::after {
   content: "";
   position: absolute;
   width: 130px;
@@ -213,11 +222,17 @@ card::after {
   pointer-events: none;
 }
 
-card:hover {
+.card:hover {
   transform: translateY(-2px);
   border-color: var(--border-strong);
-  background: linear-gradient(145deg), rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.01), var(--panel-hover);
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(139, 92, 246, 0.025);
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.01)),
+    var(--panel-hover);
+  box-shadow:
+    0 28px 80px rgba(0, 0, 0, 0.38),
+    0 0 0 1px rgba(139, 92, 246, 0.025);
 }
 
 .card h2 {
@@ -238,7 +253,7 @@ card:hover {
   margin-bottom: 22px;
 }
 
-.car-description {
+.card-description {
   margin: 5px 0 0;
   color: var(--text-muted);
   font-size: 12px;
@@ -261,7 +276,9 @@ card:hover {
   font-size: 11px;
 }
 
-.task-card {
+
+
+.tasks-card {
   min-height: 310px;
 }
 
@@ -277,7 +294,8 @@ card:hover {
   padding: 9px 10px;
   border: 1px solid transparent;
   border-radius: 11px;
-  transition: background 160ms ease,
+  transition:
+    background 160ms ease,
     border-color 160ms ease;
 }
 
@@ -299,7 +317,7 @@ card:hover {
   transition: 150ms ease;
 }
 
-.task input :hover {
+.task input:hover {
   border-color: var(--accent-bright);
 }
 
@@ -336,6 +354,7 @@ card:hover {
 
 .task-input {
   display: flex;
+  align-items: center;
   gap: 9px;
   margin-top: 15px;
 }
@@ -343,6 +362,13 @@ card:hover {
 .task-input input {
   flex: 1;
   min-width: 0;
+  height: 42px;
+  padding: 0 13px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: none;
+  background: rgba(5, 6, 10, 0.55);
+  color: var(--text);
 }
 
 .task-input input,
@@ -419,7 +445,6 @@ card:hover {
 .task-hint::before {
   content: "⌘ ";
   color: var(--accent);
-
 }
 
 .empty-state {
@@ -428,6 +453,11 @@ card:hover {
   align-items: center;
   gap: 12px;
   color: var(--text-muted);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 13px;
 }
 
 .empty-icon {
@@ -444,10 +474,14 @@ card:hover {
   font-family: "DM Mono", monospace;
 }
 
+
+
 .pomodoro-card {
   display: flex;
   flex-direction: column;
   min-height: 310px;
+  align-items: start;
+  height: fit-content;
 }
 
 .timer {
@@ -499,25 +533,25 @@ card:hover {
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.025);
   color: var(--text-soft);
-
 }
 
-.rest-button:hover {
+.reset-button:hover {
   transform: translateY(-1px);
   border-color: var(--border-strong);
   background: rgba(255, 255, 255, 0.05);
   color: var(--text);
 }
 
+
+
 .quick-links {
   min-height: 310px;
-
 }
 
 .links {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 9px
+  gap: 9px;
 }
 
 .link-item {
@@ -550,7 +584,7 @@ card:hover {
   gap: 8px;
   padding: 8px 9px;
   text-decoration: none;
-  color: #d9dae1;
+  color: #d8dae1;
   font-size: 13px;
 }
 
@@ -601,6 +635,7 @@ card:hover {
 .link-form button {
   white-space: nowrap;
 }
+
 
 
 .github-connect {
@@ -741,6 +776,8 @@ card:hover {
   font-size: 10px;
 }
 
+
+
 .coding-time-card {
   display: flex;
   flex-direction: column;
@@ -776,7 +813,9 @@ card:hover {
   border: 1px solid var(--border);
   border-radius: 13px;
   background:
-    linear-gradient(145deg, rgba(139, 92, 246, 0.055), rgba(255, 255, 255, 0.015));
+    linear-gradient(145deg,
+      rgba(139, 92, 246, 0.055),
+      rgba(255, 255, 255, 0.015));
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -794,7 +833,6 @@ card:hover {
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-
 }
 
 .hackatime-connect {
@@ -819,8 +857,11 @@ card:hover {
   background: rgba(255, 255, 255, 0.035);
   color: var(--text-soft);
   cursor: pointer;
-  transition: background 15ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
-
+  transition:
+    background 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
 }
 
 .hackatime-connect button:hover,
@@ -828,8 +869,8 @@ card:hover {
 .hackatime-logout:hover {
   transform: translateY(-1px);
   border-color: rgba(139, 92, 246, 0.3);
-  background: rgba(129, 92, 246, 0.08);
-  color: var(--text)
+  background: rgba(139, 92, 246, 0.08);
+  color: var(--text);
 }
 
 .hacktime-refresh {
@@ -857,4 +898,116 @@ card:hover {
   color: var(--red);
   font-size: 11px;
   line-height: 1.45;
+}
+
+.hackatime-updated {
+  margin: -7px 0 0;
+  color: var(--text-muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+
+/* Generic states */
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: white;
+}
+
+
+
+@media (max-width: 900px) {
+  .app {
+    padding: 34px 22px 50px;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    margin-bottom: 28px;
+  }
+
+  .card {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .app {
+    padding: 26px 15px 40px;
+  }
+
+  .header {
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .header-subtitle {
+    max-width: 230px;
+  }
+
+  .clock {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
+
+  h1 {
+    font-size: 43px;
+  }
+
+  .card {
+    padding: 19px;
+    border-radius: 18px;
+  }
+
+  .links {
+    grid-template-columns: 1fr;
+  }
+
+  .link-form {
+    grid-template-columns: 1fr;
+  }
+
+  .coding-time-stats {
+    gap: 6px;
+  }
+
+  .coding-time-stats div {
+    padding: 11px;
+  }
+
+  .coding-time-stats strong {
+    font-size: 16px;
+  }
+
+  .coding-time-stats span {
+    font-size: 8px;
+  }
+
+  .github-stats {
+    gap: 6px;
+  }
+
+  .github-stats div {
+    min-width: 0;
+    flex: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

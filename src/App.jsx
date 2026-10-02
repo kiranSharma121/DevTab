@@ -96,7 +96,7 @@ function App() {
     const text = newTask.trim();
     if (!text) return;
     setTasks((currentTasks) => [
-      ...current,
+      ...currentTasks,
       {
         id: Date.now(),
         text,
@@ -120,12 +120,7 @@ function App() {
   function deleteTask(id) {
     setTasks((currentTasks) => currentTasks.filter((task) => task.id != id));
   }
-  function handleTaskKeyDown(event) {
-    if (event.key == "Enter") {
-      event.preventDefault();
-      addTask();
-    }
-  }
+
   function addLink() {
     const name = linkName.trim();
     const url = linkUrl.trim();
@@ -149,7 +144,7 @@ function App() {
       },
     ]);
     setLinkName("");
-    setLinkUrl();
+    setLinkUrl("");
   }
   function deleteLink(id) {
     setLinks((currentLinks) => currentLinks.filter((link) => link.id !== id));
@@ -238,18 +233,22 @@ function App() {
             )}
           </div>
 
-          <div className="task-input">
+          <form
+            className="task-input"
+            onSubmit={(event) => {
+              event.preventDefault();
+              addTask();
+            }}
+          >
             <input
               type="text"
               placeholder="What needs to be done?"
               value={newTask}
               onChange={(event) => setNewTask(event.target.value)}
-              onKeyDown={handleTaskKeyDown}
               aria-label="New task"
             />
-
-            <button onClick={addTask}>Add</button>
-          </div>
+            <button type="submit">Add</button>
+          </form>
 
           {tasks.length > 0 && (
             <p className="task-hint">Double-click a task to delete it.</p>
