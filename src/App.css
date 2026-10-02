@@ -393,3 +393,468 @@ card:hover {
     box-shadow 150ms ease,
     filter 150ms ease;
 }
+
+.task-input button:hover,
+.link-form button:hover,
+.github-connect button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  box-shadow: 0 11px 28px rgba(139, 92, 246, 0.28);
+}
+
+.task-input button:active,
+.link-form button:active,
+.github-connect button:active {
+  transform: translateY(0);
+}
+
+.task-hint {
+  margin: 13px 0 0;
+  color: var(--text-muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+
+.task-hint::before {
+  content: "⌘ ";
+  color: var(--accent);
+
+}
+
+.empty-state {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted);
+}
+
+.empty-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  color: var(--accent-bright);
+  background: rgba(139, 92, 246, 0.07);
+  font-family: "DM Mono", monospace;
+}
+
+.pomodoro-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 310px;
+}
+
+.timer {
+  margin: 20px 0 25px;
+  font-family: "DM Mono", monospace;
+  font-size: clamp(48px, 7vw, 68px);
+  line-height: 1;
+  letter-spacing: -0.07em;
+  color: #fafafa;
+  text-shadow: 0 0 35px rgba(139, 92, 246, 0.16);
+}
+
+.timer-controls {
+  display: flex;
+  gap: 9px;
+}
+
+.start-button,
+.reset-button,
+.hacktime-refresh,
+.hackatime-logout {
+  height: 40px;
+  border-radius: 10px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition:
+    transform 150ms ease,
+    background 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.start-button {
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.12);
+  color: #c9b9ff;
+}
+
+.start-button:hover {
+  transform: translateY(-1px);
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.12);
+}
+
+.reset-button {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text-soft);
+
+}
+
+.rest-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+}
+
+.quick-links {
+  min-height: 310px;
+
+}
+
+.links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px
+}
+
+.link-item {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.018);
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.link-item:hover {
+  transform: translateY(-1px);
+  border-color: rgba(139, 92, 246, 0.28);
+  background: rgba(139, 92, 246, 0.06);
+}
+
+.link-item a {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 9px;
+  text-decoration: none;
+  color: #d9dae1;
+  font-size: 13px;
+}
+
+.link-item a span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.external-icon {
+  color: var(--text-muted);
+  font-size: 14px;
+  transition: color 150ms ease;
+}
+
+.link-item:hover .external-icon {
+  color: var(--accent-bright);
+}
+
+.delete-link {
+  width: 29px;
+  height: 29px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #555b69;
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background 150ms ease;
+}
+
+.delete-link:hover {
+  color: var(--red);
+  background: rgba(251, 113, 133, 0.08);
+}
+
+.link-form {
+  display: grid;
+  grid-template-columns: 0.7fr 1.3fr auto;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.link-form button {
+  white-space: nowrap;
+}
+
+
+.github-connect {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.github-connect input {
+  flex: 1;
+  min-width: 180px;
+}
+
+.github-profile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.github-avatar {
+  width: 58px;
+  height: 58px;
+  border: 2px solid rgba(139, 92, 246, 0.28);
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px rgba(139, 92, 246, 0.05);
+}
+
+.github-profile h3 {
+  margin: 0;
+  color: #f2f3f5;
+  font-size: 17px;
+}
+
+.github-profile p {
+  margin: 4px 0 0;
+  color: var(--text-muted);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+}
+
+.github-stats {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.github-stats div {
+  min-width: 82px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.github-stats strong {
+  display: block;
+  color: #f3f4f6;
+  font-family: "DM Mono", monospace;
+  font-size: 20px;
+}
+
+.github-stats span {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.github-error {
+  width: 100%;
+  margin: 8px 0 0;
+  color: var(--red);
+  font-size: 12px;
+}
+
+.github-profile-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 17px;
+  color: var(--accent-bright);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.github-profile-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.repo-title {
+  margin: 25px 0 12px;
+  color: var(--text-muted);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.repositories {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.repository {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 13px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.015);
+  text-decoration: none;
+  color: #e3e4e8;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.repository:hover {
+  transform: translateX(2px);
+  border-color: rgba(139, 92, 246, 0.3);
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.repository span {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.repository small {
+  color: #565c6a;
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+}
+
+.coding-time-card {
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+}
+
+.coding-time-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.coding-time-header h2 {
+  margin: 0;
+}
+
+.coding-time-header p {
+  margin: 5px 0 0;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.coding-time-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+}
+
+.coding-time-stats div {
+  min-width: 0;
+  padding: 15px;
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  background:
+    linear-gradient(145deg, rgba(139, 92, 246, 0.055), rgba(255, 255, 255, 0.015));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.coding-time-stats strong {
+  color: #f4f4f6;
+  font-family: "DM Mono", monospace;
+  font-size: 19px;
+  letter-spacing: -0.03em;
+}
+
+.coding-time-stats span {
+  color: var(--text-muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+
+}
+
+.hackatime-connect {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.hackatime-connect p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.hackatime-connect button,
+.hacktime-refresh,
+.hackatime-logout {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: background 15ms ease, border-color 150ms ease, color 150ms ease, transform 150ms ease;
+
+}
+
+.hackatime-connect button:hover,
+.hacktime-refresh:hover,
+.hackatime-logout:hover {
+  transform: translateY(-1px);
+  border-color: rgba(139, 92, 246, 0.3);
+  background: rgba(129, 92, 246, 0.08);
+  color: var(--text)
+}
+
+.hacktime-refresh {
+  font-size: 11px;
+}
+
+.hackatime-refresh:disabled,
+.hacktime-refresh:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hackatime-logout {
+  align-self: flex-start;
+  font-size: 11px;
+}
+
+.hackatime-error {
+  margin: 0;
+  padding: 9px 11px;
+  border: 1px solid rgba(251, 113, 133, 0.16);
+  border-radius: 9px;
+  background: rgba(251, 113, 133, 0.06);
+  color: var(--red);
+  font-size: 11px;
+  line-height: 1.45;
+}
